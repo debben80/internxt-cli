@@ -11,7 +11,7 @@ env:
 
 jobs:
   build_and_publish:
-      name: Push Docker image to GHCR
+      name: Push Docker images
       runs-on: ubuntu-latest
       permissions:
         packages: write
