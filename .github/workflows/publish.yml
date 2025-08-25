@@ -43,7 +43,7 @@ jobs:
           with:
             images: |
               ${{ env.REGISTRY_GHCR }}/${{ env.IMAGE_NAME }}
-              ${{ env.REGISTRY_DOCKERHUB }}/${{ env.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+              ${{ env.REGISTRY_DOCKERHUB }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
 
         - name: Build and push Docker image
           id: push
