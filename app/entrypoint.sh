@@ -24,7 +24,7 @@ get_secure_var() {
 }
 
 internxt_login() {
-    internxt_cmd=( internxt login -x -e "$INTERNXT_EMAIL_VALUE" -p "$INTERNXT_PASSWORD_VALUE" )
+    local internxt_cmd="internxt login -x -e \"$INTERNXT_EMAIL_VALUE\" -p \"$INTERNXT_PASSWORD_VALUE\""
     if [ -n "$WEBDAV_TOTP_SECRET_VALUE" ]; then
         INTERNXT_TOTP_CODE=$(oathtool --totp -b "$INTERNXT_TOTP_SECRET_VALUE")
 
@@ -32,10 +32,10 @@ internxt_login() {
             echo "$(date '+%Y-%m-%d %H:%M:%S') Error: Failed to generate OTP from WEBDAV_TOTP_SECRET."
             exit 1
         fi
-        internxt_cmd+=( -w "$INTERNXT_TOTP_CODE" )
+        internxt_cmd="$internxt_cmd -w \"$INTERNXT_TOTP_CODE\""
     fi
 
-    "${internxt_cmd[@]}"
+    eval "$internxt_cmd"
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') Login failed" >&2
         exit 1
