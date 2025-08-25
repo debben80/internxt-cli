@@ -32,18 +32,17 @@ get_secure_var() {
 }
 
 internxt_login() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') Login..."
     local internxt_cmd="internxt login -x -e \"$INTERNXT_EMAIL_VALUE\" -p \"$INTERNXT_PASSWORD_VALUE\""
     if [ -n "$INTERNXT_TOTP_SECRET_VALUE" ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') Using 2FA-TOTP Login"
         INTERNXT_TOTP_CODE=$(oathtool --totp -b "$INTERNXT_TOTP_SECRET_VALUE")
-
         if [ -z "$INTERNXT_TOTP_CODE" ]; then
             echo "$(date '+%Y-%m-%d %H:%M:%S') Error: Failed to generate OTP from WEBDAV_TOTP_SECRET." >&2
             exit 1
         fi
         internxt_cmd="$internxt_cmd -w \"$INTERNXT_TOTP_CODE\""
     fi
-
+    echo "$(date '+%Y-%m-%d %H:%M:%S') Login..."
     eval "$internxt_cmd"
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') Login failed" >&2:q
@@ -54,16 +53,20 @@ internxt_login() {
 }
 
 internxt_webdav(){
-    echo "$(date '+%Y-%m-%d %H:%M:%S') Start Webdav server..."
+    echo "$(date '+%Y-%m-%d %H:%M:%S') Start WebDAV server..."
     internxt webdav enable
+    if [ $? -ne 0 ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') Starting WebDAV server failed" >&2
+        exit 1
+    fi
 }
 internxt_watch(){
-    echo "$(date '+%Y-%m-%d %H:%M:%S') Webdav running..."
+    echo "$(date '+%Y-%m-%d %H:%M:%S') WebDAV running..."
     ## to do
     tail -f /dev/null
 }
 if [ "$WEBDAV_ENABLE" -eq 1 ]; then
-    echo "WebDAV server mode..."
+    echo "$(date '+%Y-%m-%d %H:%M:%S') WebDAV server mode..."
     INTERNXT_EMAIL_VALUE=$(get_secure_var "INTERNXT_EMAIL" "true")
     INTERNXT_PASSWORD_VALUE=$(get_secure_var "INTERNXT_PASSWORD" "true")
     INTERNXT_TOTP_SECRET_VALUE=$(get_secure_var "INTERNXT_TOTP_SECRET")
