@@ -62,7 +62,7 @@ internxt_watch(){
     ## to do
     tail -f /dev/null
 }
-if [ "$WEBDAV_ENABLE" ]; then
+if [ "$WEBDAV_ENABLE" -eq 1 ]; then
     echo "WebDAV server mode..."
     INTERNXT_EMAIL_VALUE=$(get_secure_var "INTERNXT_EMAIL" "true")
     INTERNXT_PASSWORD_VALUE=$(get_secure_var "INTERNXT_PASSWORD" "true")

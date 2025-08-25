@@ -23,7 +23,7 @@ The script uses the following environment variables for configuration:
 
 | Variable                     | Description                                                                 | Required? |
 |------------------------------|-----------------------------------------------------------------------------|-----------|
-| `WEBDAV_ENABLE`              | Enables WebDAV mode if set to `true`.                                       | No       |
+| `WEBDAV_ENABLE`              | Enables WebDAV mode if set to `1`.                                          | No       |
 | `INTERNXT_EMAIL`             | Internxt login email.                                                       | Yes       |
 | `INTERNXT_PASSWORD`          | Internxt login password.                                                    | Yes       |
 | `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                                  | No        |
@@ -41,7 +41,7 @@ docker build -t internxt-webdav .
 ### **2. Start the container**
 ```bash
 docker run -d \
-  -e WEBDAV_ENABLE=true \
+  -e WEBDAV_ENABLE=1 \
   -e INTERNXT_EMAIL=my@email.com \
   -e INTERNXT_PASSWORD=mypassword \
   -e INTERNXT_TOTP_SECRET=myTOTPsecret \
