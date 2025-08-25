@@ -16,11 +16,21 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
+      - name: Get Docker Hub Bearer Token
+        id: get_token
+        run: |
+          RESPONSE=$(curl -s -X POST \
+            -H "Content-Type: application/json" \
+            -d "{\"access_token\": \"${{ secrets.DOCKERHUB_TOKEN }}\"}" \
+            "https://hub.docker.com/v2/auth/token")
+          TOKEN=$(echo $RESPONSE | jq -r '.token')
+          echo "token=$TOKEN" >> $GITHUB_OUTPUT
+
       - name: Update Docker Hub README
         run: |
           README_CONTENT=$(cat README.md | jq -Rs .)
           curl -X PATCH \
-            -H "Authorization: JWT ${{ secrets.DOCKERHUB_TOKEN }}" \
+            -H "Authorization: Bearer ${{ steps.get_token.outputs.token }}" \
             -H "Content-Type: application/json" \
             -d "{\"full_description\": $README_CONTENT}" \
             "https://hub.docker.com/v2/repositories/${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}/"
