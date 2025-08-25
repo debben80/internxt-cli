@@ -3,6 +3,7 @@ set -e
 
 get_secure_var() {
     local var_name="$1"
+    local is_required="$2"
     local file_var_name="${var_name}_FILE"
     local value=""
 
@@ -11,19 +12,23 @@ get_secure_var() {
         if [ -f "$file_path" ]; then
             value=$(cat "$file_path" | tr -d '\n')
         else
-            echo "$(date '+%Y-%m-%d %H:%M:%S') Error : file ($file_path) doesn't exist."
+            echo "$(date '+%Y-%m-%d %H:%M:%S') Error : file ($file_path) doesn't exist." >&2
             exit 1
         fi
     elif [ -n "$(eval echo "\$$var_name")" ]; then
         value="$(eval echo "\$$var_name")"
-    else
-        echo "$(date '+%Y-%m-%d %H:%M:%S') Error : $var_name or $file_var_name must be defined."
+    elif [ "$is_required" = "true" ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') Error : $var_name or $file_var_name must be defined." >&2
         exit 1
+    else
+        echo "$(date '+%Y-%m-%d %H:%M:%S') Debug: $var_name is optional and not defined. Returning empty string." >&2
+        value=""
     fi
     echo "$value"
 }
 
 internxt_login() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') Login..."
     local internxt_cmd="internxt login -x -e \"$INTERNXT_EMAIL_VALUE\" -p \"$INTERNXT_PASSWORD_VALUE\""
     if [ -n "$WEBDAV_TOTP_SECRET_VALUE" ]; then
         INTERNXT_TOTP_CODE=$(oathtool --totp -b "$INTERNXT_TOTP_SECRET_VALUE")
@@ -45,15 +50,18 @@ internxt_login() {
 }
 
 internxt_webdav(){
+    echo "$(date '+%Y-%m-%d %H:%M:%S') Start Webdav server..."
     internxt webdav enable
 }
 internxt_watch(){
+    echo "$(date '+%Y-%m-%d %H:%M:%S') Webdav running..."
+    ## to do
     tail -f /dev/null
 }
 if [ "$WEBDAV_ENABLE" = "true" ]; then
-    echo "WebDAV server mode.."
-    INTERNXT_EMAIL_VALUE=$(get_secure_var "INTERNXT_EMAIL")
-    INTERNXT_PASSWORD_VALUE=$(get_secure_var "INTERNXT_PASSWORD")
+    echo "WebDAV server mode..."
+    INTERNXT_EMAIL_VALUE=$(get_secure_var "INTERNXT_EMAIL" "true")
+    INTERNXT_PASSWORD_VALUE=$(get_secure_var "INTERNXT_PASSWORD" "true")
     INTERNXT_TOTP_SECRET_VALUE=$(get_secure_var "INTERNXT_TOTP_SECRET")
     internxt_login
     internxt_webdav
@@ -61,4 +69,3 @@ if [ "$WEBDAV_ENABLE" = "true" ]; then
 else
     exec "$@"
 fi
-tail -f /dev/null
