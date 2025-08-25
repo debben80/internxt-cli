@@ -13,9 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Install jq
-        run: sudo apt-get install -y jq
-
       - name: Get Docker Hub Bearer Token
         id: get_token
         run: |
