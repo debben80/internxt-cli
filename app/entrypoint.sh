@@ -15,14 +15,18 @@ get_secure_var() {
             echo "$(date '+%Y-%m-%d %H:%M:%S') Error : file ($file_path) doesn't exist." >&2
             exit 1
         fi
-    elif [ -n "$(eval echo "\$$var_name")" ]; then
-        value="$(eval echo "\$$var_name")"
-    elif [ "$is_required" = "true" ]; then
-        echo "$(date '+%Y-%m-%d %H:%M:%S') Error : $var_name or $file_var_name must be defined." >&2
-        exit 1
     else
-        echo "$(date '+%Y-%m-%d %H:%M:%S') Debug: $var_name is optional and not defined. Returning empty string." >&2
-        value=""
+        if [ -n "$(eval echo "\$$var_name")" ]; then
+            value="$(eval echo "\$$var_name")"
+        else
+            if [ "$is_required" = "true" ]; then
+                echo "$(date '+%Y-%m-%d %H:%M:%S') Error : $var_name or $file_var_name must be defined." >&2
+                exit 1
+            else
+                echo "$(date '+%Y-%m-%d %H:%M:%S') Debug: $var_name is optional and not defined. Returning empty string." >&2
+                value=""
+            fi
+        fi
     fi
     echo "$value"
 }
