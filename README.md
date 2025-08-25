@@ -37,6 +37,7 @@ Variables can be used with secrets, just add **_FILE**
 ```bash
 docker build -t internxt-webdav .
 ```
+
 ### **2. Start the container**
 ```bash
 docker run -d \
