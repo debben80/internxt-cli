@@ -18,7 +18,7 @@ jobs:
         contents: read
       steps: 
         - name: Checkout repository
-          uses: actions/checkout@v4
+          uses: actions/checkout@v5
  
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v3
@@ -47,7 +47,7 @@ jobs:
 
         - name: Build and push Docker image
           id: push
-          uses: docker/build-push-action@v5
+          uses: docker/build-push-action@v6
           with:
             context: .
             platforms: linux/amd64,linux/arm64
