@@ -1,6 +1,7 @@
 # Internxt-cli
 
-This project allows you to start a **WebDAV server** for **Internxt** in a Docker container. It uses an entrypoint script (`entrypoint.sh`) to handle secure login, enable the WebDAV server, and keep the container running. If WebDAV mode is not enabled, this project can be used to launch **internxt** commands. 
+This project allows you to start a **WebDAV server** for **Internxt** in a Docker container. It uses an entrypoint script (`entrypoint.sh`) to handle secure login, enable the WebDAV server, and keep the container running.
+If WebDAV mode is not enabled, this project can be used to launch **internxt** commands. 
 
 ---
 
