@@ -53,8 +53,6 @@ internxt_login() {
 }
 
 internxt_webdav(){
-    WEBDAV_PROTO=${WEBDAV_PROTO:-https}
-    WEBDAV_PORT=${WEBDAV_PORT:-3005}
     local webdav_config="internxt webdav-config"
     echo "$(date '+%Y-%m-%d %H:%M:%S') Configure WebDAV server..."
     if [ "$WEBDAV_PROTO" = "http" ]; then
@@ -77,15 +75,25 @@ internxt_webdav(){
 internxt_watch(){
     echo "$(date '+%Y-%m-%d %H:%M:%S') WebDAV running..."
     ## to do
-    tail -f /dev/null
+    local log_path=$(internxt logs --json | jq -r '.path')
+    local log_file="internxt-webdav-error.log"
+    if [ "WEBDAV_LOGS" = "debug" ]; then
+        log_file="internxt-webdav-combined.log"
+    fi
+    tail -f $log_path/$log_file
 }
 
 INTERNXT_EMAIL_VALUE=$(get_secure_var "INTERNXT_EMAIL" "true")
 INTERNXT_PASSWORD_VALUE=$(get_secure_var "INTERNXT_PASSWORD" "true")
 INTERNXT_TOTP_SECRET_VALUE=$(get_secure_var "INTERNXT_TOTP_SECRET")
+
 internxt_login
 
 WEBDAV_ENABLE=${WEBDAV_ENABLE:-0}
+WEBDAV_PROTO=${WEBDAV_PROTO:-https}
+WEBDAV_PORT=${WEBDAV_PORT:-3005}
+WEBDAV_LOGS=${WEBDAV_LOGS:-error}
+
 if [ "$WEBDAV_ENABLE" -eq 1 ]; then
     echo "$(date '+%Y-%m-%d %H:%M:%S') WebDAV server mode..."
     internxt_webdav

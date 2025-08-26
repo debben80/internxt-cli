@@ -9,7 +9,7 @@ FROM alpine:3.22
 WORKDIR /app
 COPY --from=build /app .
 RUN apk update && \
-    apk add nodejs oath-toolkit-oathtool --no-cache && \
+    apk add nodejs oath-toolkit-oathtool jq --no-cache && \
     chmod +x /app/entrypoint.sh && \
     rm -rf /var/cache/apk/* /tmp* && \
     ln -s '/app/node_modules/@internxt/cli/bin/run.js' /usr/local/bin/internxt

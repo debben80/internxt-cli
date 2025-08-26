@@ -26,6 +26,7 @@ The script uses the following environment variables for configuration:
 | `WEBDAV_ENABLE`              | Enables WebDAV mode if set to `1`.                                          | No        | `0`     |
 | `WEBDAV_PROTO`               | Protocol used for WebDAV `http` or `https`.                                 | No        | `https` |
 | `WEBDAV_PORT`                | Listening port for WebDAV                                                   | No        | `3005`  |
+| `WEBDAV_LOGS`                | Logs to output to stdout `error` or `debug`.                                | No        | `error` |
 | `INTERNXT_EMAIL`             | Internxt login email.                                                       | Yes       |         |
 | `INTERNXT_PASSWORD`          | Internxt login password.                                                    | Yes       |         |
 | `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                                  | No        |         |
