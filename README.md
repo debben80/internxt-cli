@@ -21,14 +21,16 @@ If WebDAV mode is not enabled, this project can be used to launch **internxt** c
 ## **Environment Variables**
 The script uses the following environment variables for configuration:
 
-| Variable                     | Description                                                                 | Required? |
-|------------------------------|-----------------------------------------------------------------------------|-----------|
-| `WEBDAV_ENABLE`              | Enables WebDAV mode if set to `1`.                                          | No       |
-| `INTERNXT_EMAIL`             | Internxt login email.                                                       | Yes       |
-| `INTERNXT_PASSWORD`          | Internxt login password.                                                    | Yes       |
-| `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                                  | No        |
+| Variable                     | Description                                                                 | Required? | Default |
+|------------------------------|-----------------------------------------------------------------------------|-----------|---------|
+| `WEBDAV_ENABLE`              | Enables WebDAV mode if set to `1`.                                          | No        | `0`     |
+| `WEBDAV_PROTO`               | Protocol used for WebDAV `http` or `https`.                                 | No        | `https` |
+| `WEBDAV_PORT`                | Listening port for WebDAV                                                   | No        | `3005`  |
+| `INTERNXT_EMAIL`             | Internxt login email.                                                       | Yes       |         |
+| `INTERNXT_PASSWORD`          | Internxt login password.                                                    | Yes       |         |
+| `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                                  | No        |         |
 
-Variables can be used with secrets, just add **_FILE**
+All **INTERNXT_** variables can be used with secrets, just add **_FILE**
 
 ---
 
