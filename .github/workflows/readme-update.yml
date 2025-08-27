@@ -2,6 +2,8 @@ name: Update Docker Hub README
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'README.md'
 
