@@ -8,9 +8,8 @@ RUN apk update && \
 FROM alpine:3.22
 WORKDIR /app
 COPY --from=build /app .
-RUN apk update && apk upgrade && \
+RUN apk update && \
     apk add --no-cache nodejs oath-toolkit-oathtool jq su-exec && \
-    rm -rf /var/cache/apk/* /tmp* && \
     addgroup -S -g 1000 appgroup && \
     adduser -S -u 1000 -G appgroup appuser && \
     chmod +x /app/entrypoint.sh /app/webdav.sh && \
