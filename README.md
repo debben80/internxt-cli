@@ -10,6 +10,7 @@ This container can be used to launch **internxt** commands.
 - Automatic WebDAV server activation.
 - Secure environment variable management (via files or direct variables).
 - Use this container to launch internxt commands
+- Run as a non-root user
 
 ---
 
@@ -22,14 +23,16 @@ This container can be used to launch **internxt** commands.
 ## **Environment Variables**
 The script uses the following environment variables for configuration:
 
-| Variable                     | Description                                                                 | Required? | Default |
-|------------------------------|-----------------------------------------------------------------------------|-----------|---------|
-| `INTERNXT_EMAIL`             | Internxt login email.                                                       | Yes       |         |
-| `INTERNXT_PASSWORD`          | Internxt login password.                                                    | Yes       |         |
-| `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                                  | No        |         |
-| `WEBDAV_PROTO`               | Protocol used for WebDAV `http` or `https`.                                 | No        | `https` |
-| `WEBDAV_PORT`                | Listening port for WebDAV                                                   | No        | `3005`  |
-| `WEBDAV_LOGS`                | Logs to output to stdout `error` or `debug`.                                | No        | `error` |
+| Variable                     | Description                                                         | Required? | Default |
+|------------------------------|---------------------------------------------------------------------|-----------|---------|
+| `INTERNXT_EMAIL`             | Internxt login email.                                               | Yes       |         |
+| `INTERNXT_PASSWORD`          | Internxt login password.                                            | Yes       |         |
+| `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                          | No        |         |
+| `WEBDAV_PROTO`               | Protocol used for WebDAV `http` or `https`.                         | No        | `https` |
+| `WEBDAV_PORT`                | Listening port for WebDAV                                           | No        | `3005`  |
+| `WEBDAV_LOGS`                | Logs to output to stdout `error` or `debug`.                        | No        | `error` |
+| `PUID`                       | User ID                                                             | No        | `1000`  |
+| `GUID`                       | Group ID                                                            | No        | `1000`  |
 
 All **INTERNXT_** variables can be used with secrets, just add **_FILE**
 
@@ -49,4 +52,13 @@ docker run -d \
   -e INTERNXT_PASSWORD=mypassword \
   -e INTERNXT_TOTP_SECRET=myTOTPsecret \
   internxt-cli
+```
+
+### **3. Run internxt commands**
+```bash
+docker run -d \
+  -e INTERNXT_EMAIL=my@email.com \
+  -e INTERNXT_PASSWORD=mypassword \
+  -e INTERNXT_TOTP_SECRET=myTOTPsecret \
+  internxt-cli internxt list
 ```
