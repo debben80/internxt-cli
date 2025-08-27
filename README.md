@@ -12,6 +12,7 @@ This project provides a Docker image for running the [Internxt CLI](https://gith
 - **Run any Internxt CLI command** inside the container.
 - **Non-root user** execution for improved security.
 - **Configurable WebDAV protocol, port, and logging level**.
+- **Configurable TimeZone**.
 - **Multi-arch builds** for `amd64` and `arm64`.
 
 ---
@@ -27,16 +28,17 @@ This project provides a Docker image for running the [Internxt CLI](https://gith
 
 You can configure the container using the following environment variables:
 
-| Variable                     | Description                                                         | Required | Default |
-|------------------------------|---------------------------------------------------------------------|----------|---------|
-| `INTERNXT_EMAIL`             | Internxt login email.                                               | Yes      |         |
-| `INTERNXT_PASSWORD`          | Internxt login password.                                            | Yes      |         |
-| `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                          | No       |         |
-| `WEBDAV_PROTO`               | Protocol for WebDAV (`http` or `https`).                            | No       | `https` |
-| `WEBDAV_PORT`                | WebDAV listening port.                                              | No       | `3005`  |
-| `WEBDAV_LOGS`                | Log level (`error` or `debug`).                                     | No       | `error` |
-| `PUID`                       | User ID for running processes.                                      | No       | `1000`  |
-| `PGID`                       | Group ID for running processes.                                     | No       | `1000`  |
+| Variable                     | Description                                               | Required | Default  |
+|------------------------------|-----------------------------------------------------------|----------|----------|
+| `INTERNXT_EMAIL`             | Internxt login email.                                     | Yes      |          |
+| `INTERNXT_PASSWORD`          | Internxt login password.                                  | Yes      |          |
+| `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                | No       |          |
+| `WEBDAV_PROTO`               | Protocol for WebDAV (`http` or `https`).                  | No       | `https`  |
+| `WEBDAV_PORT`                | WebDAV listening port.                                    | No       | `3005`   |
+| `WEBDAV_LOGS`                | Log level (`error` or `debug`).                           | No       | `error`  |
+| `PUID`                       | User ID for running processes.                            | No       | `1000`   |
+| `PGID`                       | Group ID for running processes.                           | No       | `1000`   |
+| `TZ`                         | TimeZone for tzdata                                       | No       | `Etc/UTC`|
 
 > **Tip:** For any **INTERNXT_** variable above, you can use a corresponding `*_FILE` variable to load its value from a file (useful for secrets).
 

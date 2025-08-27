@@ -6,10 +6,11 @@ RUN apk update && \
     npm install --omit=dev
 
 FROM alpine:3.22
+ENV TZ Etc/UTC
 WORKDIR /app
 COPY --from=build /app .
 RUN apk update && \
-    apk add --no-cache nodejs oath-toolkit-oathtool jq su-exec && \
+    apk add --no-cache nodejs oath-toolkit-oathtool jq su-exec tzdata && \
     addgroup -S -g 1000 appgroup && \
     adduser -S -u 1000 -G appgroup appuser && \
     chmod +x /app/entrypoint.sh /app/webdav.sh && \
