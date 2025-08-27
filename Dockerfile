@@ -3,9 +3,7 @@ WORKDIR /app
 COPY /app .
 RUN apk update && \
     apk add npm && \
-    npm install --omit=dev && \
-    rm -rf /app/node_modules/pm2* && \
-    rm -rf /app/node_modules/@pm2
+    npm install --omit=dev
 
 FROM alpine:3.22
 WORKDIR /app
