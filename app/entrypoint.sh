@@ -43,7 +43,7 @@ internxt_login() {
         internxt_cmd="$internxt_cmd -w \"$INTERNXT_TOTP_CODE\""
     fi
     echo "$(date '+%Y-%m-%d %H:%M:%S') Login..."
-    eval "$internxt_cmd"
+    eval "exec su-exec appuser $internxt_cmd"
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') Login failed" >&2:q
         exit 1
@@ -55,15 +55,16 @@ internxt_login() {
 INTERNXT_EMAIL_VALUE=$(get_secure_var "INTERNXT_EMAIL" "true")
 INTERNXT_PASSWORD_VALUE=$(get_secure_var "INTERNXT_PASSWORD" "true")
 INTERNXT_TOTP_SECRET_VALUE=$(get_secure_var "INTERNXT_TOTP_SECRET")
-internxt_login
 
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 if [ ! "$(id -u appuser)" -eq "${PUID}" ]; then
     usermod -o -u "${PUID}" appuser
 fi
-if [ ! "$(id -g appgroup)" -eq "${PGID}" ]; then
+if [ ! "$(id -g appuser)" -eq "${PGID}" ]; then
     groupmod -o -g "${PGID}" appgroup
 fi
+
 chown -R appuser:appgroup /app
-exec su-exec appuser "$@"
+internxt_login
+su-exec appuser "$@"
