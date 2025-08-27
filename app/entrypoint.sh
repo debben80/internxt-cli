@@ -14,7 +14,7 @@ fi
 if [ ! "$(id -g appuser)" -eq "${PGID}" ]; then
     groupmod -o -g "${PGID}" appgroup
 fi
-
 chown -R appuser:appgroup /app
+
 internxt_login
 exec su-exec appuser "$@"

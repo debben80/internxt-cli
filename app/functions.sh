@@ -55,7 +55,7 @@ internxt_login() {
     fi
 }
 
-internxt_webdav(){
+internxt_webdav() {
     local webdav_config="internxt webdav-config"
     log "Configure WebDAV server..."
     if [ "$WEBDAV_PROTO" = "http" ]; then
@@ -76,7 +76,7 @@ internxt_webdav(){
     fi
 }
 
-internxt_watch(){
+internxt_watch() {
     log "WebDAV running..."
     local log_path=$(internxt logs --json | jq -r '.path')
     local log_file="internxt-webdav-error.log"
