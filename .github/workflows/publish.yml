@@ -40,6 +40,7 @@ jobs:
           tags: |
             type=semver,pattern={{version}}
             type=raw,value=dev
+          enable-prerelease-tags: true
 
       - name: Build and push dev Docker image
         id: push-dev
