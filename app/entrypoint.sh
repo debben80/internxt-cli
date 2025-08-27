@@ -67,4 +67,4 @@ fi
 
 chown -R appuser:appgroup /app
 internxt_login
-su-exec appuser "$@"
+exec su-exec appuser "$@"
