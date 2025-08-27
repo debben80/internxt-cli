@@ -13,7 +13,7 @@ jobs:
   build_dev_image:
     name: Push dev image
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
+    if: github.event.release.target_commitish == 'dev'
     permissions:
       packages: write
       contents: read
@@ -55,7 +55,7 @@ jobs:
   build_main_image:
     name: Push main image
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.event.release.target_commitish == 'main'
     permissions:
       packages: write
       contents: read
