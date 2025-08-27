@@ -43,7 +43,7 @@ internxt_login() {
         internxt_cmd="$internxt_cmd -w \"$INTERNXT_TOTP_CODE\""
     fi
     echo "$(date '+%Y-%m-%d %H:%M:%S') Login..."
-    eval "exec su-exec appuser $internxt_cmd"
+    eval "su-exec appuser $internxt_cmd"
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d %H:%M:%S') Login failed" >&2:q
         exit 1
