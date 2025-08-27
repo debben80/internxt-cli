@@ -9,7 +9,7 @@ FROM alpine:3.22
 WORKDIR /app
 RUN addgroup -S -g 1000 appgroup && adduser -S -u 1000 -G appgroup appuser
 COPY --from=build /app .
-RUN apk update && apk upgrade $$ \
+RUN apk update && apk upgrade && \
     apk add --no-cache nodejs oath-toolkit-oathtool jq su-exec && \
     rm -rf /var/cache/apk/* /tmp* && \
     addgroup -S -g 1000 appgroup && \
