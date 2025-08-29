@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-if [ "$HEALTHCHECK_ENABLED" -eq 1 ]; then
-    exec internxt webdav status
+if [ -f "/app/webdav" ]; then
+    exec internxt webdav status || kill 1
 else
     exit 0
 fi
