@@ -77,10 +77,11 @@ internxt_webdav() {
 }
 
 internxt_watch() {
+    export HEALTHCHECK_ENABLED=1
     log "WebDAV running..."
     local log_path=$(internxt logs --json | jq -r '.path')
     local log_file="internxt-webdav-error.log"
-    if [ "WEBDAV_LOGS" = "debug" ]; then
+    if [ "$WEBDAV_LOGS" = "debug" ]; then
         log_file="internxt-webdav-combined.log"
     fi
     tail -f $log_path/$log_file
