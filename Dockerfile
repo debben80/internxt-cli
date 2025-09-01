@@ -6,7 +6,7 @@ RUN apk -U upgrade && \
     npm install --omit=dev
 
 FROM alpine:3.22
-ENV TZ Etc/UTC
+ENV TZ=Etc/UTC
 WORKDIR /app
 COPY --from=build /app .
 RUN apk upgrade -U --no-cache && \
