@@ -9,12 +9,12 @@ FROM alpine:3.22
 ENV TZ Etc/UTC
 WORKDIR /app
 COPY --from=build /app .
-RUN apk -U upgrade && \
+RUN apk upgrade -U --no-cache && \
     apk add --no-cache nodejs oath-toolkit-oathtool jq su-exec tzdata && \
     addgroup -S -g 1000 appgroup && \
     adduser -S -u 1000 -G appgroup appuser && \
     chmod +x /app/entrypoint.sh /app/webdav.sh /app/healthcheck.sh && \
-    rm -rf /var/cache/apk/* /tmp* && \
+    rm -rf /var/cache/apk/* /tmp/* && \
     ln -s '/app/node_modules/@internxt/cli/bin/run.js' /usr/local/bin/internxt
 EXPOSE 3005
 ENTRYPOINT ["/app/entrypoint.sh"]
