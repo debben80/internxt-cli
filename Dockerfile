@@ -1,7 +1,7 @@
 FROM alpine:3.22 AS build
 WORKDIR /app
 COPY /app .
-RUN apk update && \
+RUN apk -U upgrade && \
     apk add npm && \
     npm install --omit=dev
 
@@ -9,7 +9,7 @@ FROM alpine:3.22
 ENV TZ Etc/UTC
 WORKDIR /app
 COPY --from=build /app .
-RUN apk update && \
+RUN apk -U upgrade && \
     apk add --no-cache nodejs oath-toolkit-oathtool jq su-exec tzdata && \
     addgroup -S -g 1000 appgroup && \
     adduser -S -u 1000 -G appgroup appuser && \
