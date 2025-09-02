@@ -3,7 +3,7 @@ WORKDIR /app
 COPY /app .
 RUN apk -U upgrade && \
     apk add pnpm && \
-    pnpm install --prod --no-optional
+    pnpm install --prod
 
 FROM alpine:3.22
 ENV TZ=Etc/UTC
