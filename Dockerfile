@@ -2,8 +2,8 @@ FROM alpine:3.22 AS build
 WORKDIR /app
 COPY /app .
 RUN apk -U upgrade && \
-    apk add npm && \
-    npm install --omit=dev
+    apk add pnpm && \
+    pnpm install --prod
 
 FROM alpine:3.22
 ENV TZ=Etc/UTC
