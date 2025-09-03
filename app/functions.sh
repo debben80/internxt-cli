@@ -78,7 +78,7 @@ internxt_webdav() {
 
 internxt_watch() {
     log "WebDAV running..."
-    touch /app/webdav
+    touch /app/webdav.mode
     local log_path=$(internxt logs --json | jq -r '.path')
     local log_file="internxt-webdav-error.log"
     if [ "$WEBDAV_LOGS" = "debug" ]; then

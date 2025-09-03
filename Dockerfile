@@ -6,9 +6,10 @@ RUN apk -U upgrade && \
     npm install --omit=dev
 
 FROM alpine:3.22
-ENV TZ Etc/UTC
+ENV TZ=Etc/UTC
 WORKDIR /app
-COPY --from=build /app .
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/*.sh ./
 RUN apk upgrade -U --no-cache && \
     apk add --no-cache nodejs oath-toolkit-oathtool jq su-exec tzdata && \
     addgroup -S -g 1000 appgroup && \

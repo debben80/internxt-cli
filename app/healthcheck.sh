@@ -1,13 +1,24 @@
 #!/bin/sh
 set -e
+
+# Privilege Dropping
 spath="$(readlink -f "$0")"
 if [ "$(whoami)" = "root" ]; then
   exec su-exec appuser "$spath" "$@"
 fi
 
-internxt whoami | grep -q "$INTERNXT_EMAIL" && echo "logged with $INTERNXT_EMAIL" || exit 1
-if [ -f "/app/webdav" ]; then
-    internxt webdav status | grep -q "online" && echo "WebDAV server online" || exit 1
+# Internxt Login Check
+internxt_whoami=$(internxt whoami --json | jq -r '.login.user.username')
+if [ "$internxt_whoami" != "$INTERNXT_EMAIL" ]; then
+  exit 1
+fi
+
+# WebDAV Server Status Check
+if [ -f "/app/webdav.mode" ]; then
+  internxt_webdav_status=$(internxt webdav status --json | jq -r '.message')
+  if [ "${internxt_webdav_status#*: }" != "online" ]; then
+    exit 1
+  fi
 fi
 
 exit 0
