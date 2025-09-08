@@ -125,4 +125,5 @@ services:
 
 ## References
 
+- [Project Github Page](https://github.com/debben80/internxt-cli)
 - [Internxt CLI Documentation](https://github.com/internxt/cli)
