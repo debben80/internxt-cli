@@ -30,8 +30,8 @@ You can configure the container using the following environment variables:
 
 | Variable                     | Description                                               | Required | Default  |
 |------------------------------|-----------------------------------------------------------|----------|----------|
-| `INTERNXT_EMAIL`             | Internxt login email.                                     | Yes      |          |
-| `INTERNXT_PASSWORD`          | Internxt login password.                                  | Yes      |          |
+| `INTERNXT_EMAIL`             | Internxt login email.                                     | **Yes**  |          |
+| `INTERNXT_PASSWORD`          | Internxt login password.                                  | **Yes**  |          |
 | `INTERNXT_TOTP_CODE`         | TOTP code for two-factor authentication.                  | No       |          |
 | `INTERNXT_TOTP_SECRET`       | TOTP secret for 2FA (INTERNXT_TOTP_CODE have priority)    | No       |          |
 | `WEBDAV_PROTO`               | Protocol for WebDAV (`http` or `https`).                  | No       | `https`  |
