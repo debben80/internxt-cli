@@ -36,14 +36,19 @@ get_secure_var() {
 
 internxt_login() {
     local internxt_cmd="internxt login -x -e \"$INTERNXT_EMAIL_VALUE\" -p \"$INTERNXT_PASSWORD_VALUE\""
-    if [ -n "$INTERNXT_TOTP_SECRET_VALUE" ]; then
-        log "Using 2FA-TOTP Login"
-        INTERNXT_TOTP_CODE=$(oathtool --totp -b "$INTERNXT_TOTP_SECRET_VALUE")
-        if [ -z "$INTERNXT_TOTP_CODE" ]; then
-            log "Error: Failed to generate OTP from WEBDAV_TOTP_SECRET." >&2
-            exit 1
+    if [ -n "$INTERNXT_TOTP_CODE_VALUE" ]; then
+        log "Using 2FA-TOTP-CODE Login"
+        internxt_cmd="$internxt_cmd -w \"$INTERNXT_TOTP_CODE_VALUE\""
+    else
+        if [ -n "$INTERNXT_TOTP_SECRET_VALUE" ]; then
+            log "Using 2FA-TOTP-SECRET Login"
+            INTERNXT_TOTP_CODE_VALUE=$(oathtool --totp -b "$INTERNXT_TOTP_SECRET_VALUE")
+            if [ -z "$INTERNXT_TOTP_CODE_VALUE" ]; then
+                log "Error: Failed to generate OTP from INTERNXT_TOTP_SECRET." >&2
+                exit 1
+            fi
+            internxt_cmd="$internxt_cmd -w \"$INTERNXT_TOTP_CODE_VALUE\""
         fi
-        internxt_cmd="$internxt_cmd -w \"$INTERNXT_TOTP_CODE\""
     fi
     log "Login..."
     eval "su-exec appuser $internxt_cmd"
