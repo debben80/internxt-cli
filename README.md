@@ -32,7 +32,8 @@ You can configure the container using the following environment variables:
 |------------------------------|-----------------------------------------------------------|----------|----------|
 | `INTERNXT_EMAIL`             | Internxt login email.                                     | Yes      |          |
 | `INTERNXT_PASSWORD`          | Internxt login password.                                  | Yes      |          |
-| `INTERNXT_TOTP_SECRET`       | TOTP secret for two-factor authentication.                | No       |          |
+| `INTERNXT_TOTP_CODE`         | TOTP code for two-factor authentication.                  | No       |          |
+| `INTERNXT_TOTP_SECRET`       | TOTP secret for 2FA (INTERNXT_TOTP_CODE have priority)    | No       |          |
 | `WEBDAV_PROTO`               | Protocol for WebDAV (`http` or `https`).                  | No       | `https`  |
 | `WEBDAV_PORT`                | WebDAV listening port.                                    | No       | `3005`   |
 | `WEBDAV_LOGS`                | Log level (`error` or `debug`).                           | No       | `error`  |
@@ -40,7 +41,7 @@ You can configure the container using the following environment variables:
 | `PGID`                       | Group ID for running processes.                           | No       | `1000`   |
 | `TZ`                         | TimeZone for tzdata                                       | No       | `Etc/UTC`|
 
-> **Tip:** For any **INTERNXT_** variable above, you can use a corresponding `*_FILE` variable to load its value from a file (useful for secrets).
+> **Tip:** For any `*INTERNXT_*` variable above, you can use a corresponding `*_FILE` variable to load its value from a file (useful for secrets).
 
 ---
 
@@ -70,7 +71,7 @@ You can run any Internxt CLI command by passing it as arguments:
 docker run --rm \
   -e INTERNXT_EMAIL=my@email.com \
   -e INTERNXT_PASSWORD=mypassword \
-  -e INTERNXT_TOTP_SECRET=myTOTPsecret \
+  -e INTERNXT_TOTP_CODE=myTOTPcode \
   internxt-cli internxt list
 ```
 
