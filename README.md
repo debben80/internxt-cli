@@ -54,7 +54,7 @@ This project provides a Docker image for running the [Internxt CLI](https://gith
 You can configure the container using the following environment variables:
 
 | Variable                     | Description                                               | Required | Default  |
-|------------------------------|-----------------------------------------------------------|----------|----------|
+|------------------------------|-----------------------------------------------------------|:--------:|---------:|
 | `INTERNXT_EMAIL`             | Internxt login email.                                     | **Yes**  |          |
 | `INTERNXT_PASSWORD`          | Internxt login password.                                  | **Yes**  |          |
 | `INTERNXT_TOTP_CODE`         | TOTP code for two-factor authentication.                  | No       |          |
