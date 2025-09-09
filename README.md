@@ -41,7 +41,7 @@ You can configure the container using the following environment variables:
 | `PGID`                       | Group ID for running processes.                           | No       | `1000`   |
 | `TZ`                         | TimeZone for tzdata                                       | No       | `Etc/UTC`|
 
-> **Tip:** For any `*INTERNXT_*` variable above, you can use a corresponding `*_FILE` variable to load its value from a file (useful for secrets).
+> **Tip:** For any `INTERNXT_*` variable above, you can use a corresponding `*_FILE` variable to load its value from a file (useful for secrets).
 
 ---
 
