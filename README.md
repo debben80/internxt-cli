@@ -1,6 +1,27 @@
+[![Docker Pulls](https://img.shields.io/docker/pulls/debben80/internxt-cli?style=flat-square)](https://hub.docker.com/r/debben80/internxt-cli)
+[![GitHub Container Registry](https://img.shields.io/badge/GHCR-debben80%2Finternxt--cli-blue?logo=github&style=flat-square)](https://github.com/users/debben80/packages/container/package/internxt-cli)
+[![License: MIT](https://img.shields.io/github/license/debben80/internxt-cli?style=flat-square)](LICENSE)
 # Internxt CLI Docker Image
 
 This project provides a Docker image for running the [Internxt CLI](https://github.com/internxt/cli) and launching a **WebDAV server** backed by your Internxt cloud storage. It is designed for secure, automated deployments and supports two-factor authentication (TOTP), non-root execution, and flexible configuration via environment variables or secret files.
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Environment Variables](#environment-variables)
+- [Docker images](#docker-images)
+- [Usage](#usage)
+  - [Start the WebDAV Server](#start-the-webdav-server)
+  - [Run Internxt CLI Commands](#run-internxt-cli-commands)
+  - [Using Secrets](#using-secrets)
+- [Docker Compose Example](#docker-compose-example)
+- [Security Notes](#security-notes)
+- [Development](#development)
+- [References](#references)
+- [License](#license)
 
 ---
 
@@ -45,7 +66,7 @@ You can configure the container using the following environment variables:
 
 ---
 
-### Docker images
+### Docker Images
  | Registry                      | Address ( tag : `latest` )                         |
  |-------------------------------|----------------------------------------------------|
  | **Docker Hub**                | `docker pull debben80/internxt-cli:latest`         |
@@ -129,3 +150,9 @@ services:
 - [Project Github Page](https://github.com/debben80/internxt-cli)
 - [Docker Hub Page](https://hub.docker.com/r/debben80/internxt-cli)
 - [Internxt CLI Documentation](https://github.com/internxt/cli)
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
