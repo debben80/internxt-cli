@@ -1,3 +1,4 @@
+[![Release](https://img.shields.io/github/v/release/debben80/internxt-cli?style=flat-square)](https://github.com/debben80/internxt-cli/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/debben80/internxt-cli?style=flat-square)](https://hub.docker.com/r/debben80/internxt-cli)
 [![GitHub Container Registry](https://img.shields.io/badge/GHCR-debben80%2Finternxt--cli-blue?logo=github&style=flat-square)](https://github.com/users/debben80/packages/container/package/internxt-cli)
 [![License: MIT](https://img.shields.io/github/license/debben80/internxt-cli?style=flat-square)](LICENSE)
