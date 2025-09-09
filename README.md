@@ -13,7 +13,7 @@ This project provides a Docker image for running the [Internxt CLI](https://gith
 - **Non-root user** execution for improved security.
 - **Configurable WebDAV protocol, port, and logging level**.
 - **Configurable TimeZone**.
-- **Multi-arch builds** for `amd64` and `arm64`.
+- **Multi-arch builds** for `amd64` , `arm64` and `armv7`.
 
 ---
 
@@ -45,25 +45,27 @@ You can configure the container using the following environment variables:
 
 ---
 
+### Docker images
+ | Registry                      | Address ( tag : `latest` )                         |
+ |-------------------------------|----------------------------------------------------|
+ | **Docker Hub**                | `docker pull debben80/internxt-cli:latest`         |
+ | **GitHub Container Registry** | `docker pull ghcr.io/debben80/internxt-cli:latest` |
+ 
+---
+
 ## Usage
 
-### 1. Build the Docker Image
-
-```sh
-docker build -t internxt-cli .
-```
-
-### 2. Start the WebDAV Server
+### Start the WebDAV Server
 
 ```sh
 docker run -d \
   -e INTERNXT_EMAIL=my@email.com \
   -e INTERNXT_PASSWORD=mypassword \
   -e INTERNXT_TOTP_SECRET=myTOTPsecret \
-  internxt-cli
+  debben80/internxt-cli
 ```
 
-### 3. Run Internxt CLI Commands
+### Run Internxt CLI Commands
 
 You can run any Internxt CLI command by passing it as arguments:
 
@@ -72,10 +74,10 @@ docker run --rm \
   -e INTERNXT_EMAIL=my@email.com \
   -e INTERNXT_PASSWORD=mypassword \
   -e INTERNXT_TOTP_CODE=myTOTPcode \
-  internxt-cli internxt list
+  debben80/internxt-cli internxt list
 ```
 
-### 4. Using Secrets
+### Using Secrets
 
 To use secrets, mount files and set the corresponding `*_FILE` environment variable:
 
@@ -84,7 +86,7 @@ docker run -d \
   -e INTERNXT_EMAIL_FILE=/run/secrets/email \
   -e INTERNXT_PASSWORD_FILE=/run/secrets/password \
   -v /run/secrets:/run/secrets:ro \
-  internxt-cli
+  debben80/internxt-cli
 ```
 
 ---
@@ -92,10 +94,9 @@ docker run -d \
 ## Docker Compose Example
 
 ```yaml
-version: '3.8'
 services:
   internxt-webdav:
-    image: internxt-cli:latest
+    image: debben80/internxt-cli:latest
     environment:
       INTERNXT_EMAIL: your@email.com
       INTERNXT_PASSWORD: yourpassword
@@ -126,4 +127,5 @@ services:
 ## References
 
 - [Project Github Page](https://github.com/debben80/internxt-cli)
+- [Docker Hub Page](https://hub.docker.com/r/debben80/internxt-cli)
 - [Internxt CLI Documentation](https://github.com/internxt/cli)
