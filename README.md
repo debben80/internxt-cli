@@ -122,7 +122,6 @@ services:
     environment:
       INTERNXT_EMAIL: your@email.com
       INTERNXT_PASSWORD: yourpassword
-      WEBDAV_PORT: 3005
     ports:
       - "3005:3005"
     restart: unless-stopped
