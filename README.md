@@ -1,3 +1,4 @@
+[![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/debben80/internxt-cli/%40internxt%2Fcli?filename=%2Fapp%2Fpackage.json&style=flat-square)](https://github.com/internxt/cli)
 [![Release](https://img.shields.io/github/v/release/debben80/internxt-cli?style=flat-square)](https://github.com/debben80/internxt-cli/releases)
 [![Architecture](https://img.shields.io/badge/Arch-amd64%20%7C%20arm64%20%7C%20armv7-blue)](https://github.com/debben80/internxt-cli)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/debben80/internxt-cli/publish.yml)](https://github.com/debben80/internxt-cli/actions/workflows/publish.yml)
