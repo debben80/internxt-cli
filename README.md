@@ -1,7 +1,9 @@
 [![Release](https://img.shields.io/github/v/release/debben80/internxt-cli?style=flat-square)](https://github.com/debben80/internxt-cli/releases)
+[![Architecture](https://img.shields.io/badge/Arch-amd64%20%7C%20arm64%20%7C%20armv7-blue)](https://github.com/debben80/internxt-cli)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/debben80/internxt-cli/publish.yml)](https://github.com/debben80/internxt-cli/actions/workflows/publish.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/debben80/internxt-cli?style=flat-square)](https://hub.docker.com/r/debben80/internxt-cli)
 [![GitHub Container Registry](https://img.shields.io/badge/GHCR-debben80%2Finternxt--cli-blue?logo=github&style=flat-square)](https://github.com/users/debben80/packages/container/package/internxt-cli)
-[![License: MIT](https://img.shields.io/github/license/debben80/internxt-cli?style=flat-square)](LICENSE)
+[![GitHub License](https://img.shields.io/github/license/debben80/internxt-cli?style=flat-square)](LICENSE)
 # Internxt CLI Docker Image
 
 This project provides a Docker image for running the [Internxt CLI](https://github.com/internxt/cli) and launching a **WebDAV server** backed by your Internxt cloud storage. It is designed for secure, automated deployments and supports two-factor authentication (TOTP), non-root execution, and flexible configuration via environment variables or secret files.
