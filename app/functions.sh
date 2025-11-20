@@ -35,7 +35,7 @@ get_secure_var() {
 }
 
 internxt_login() {
-    local internxt_cmd="internxt login -x -e \"$INTERNXT_EMAIL_VALUE\" -p \"$INTERNXT_PASSWORD_VALUE\""
+    local internxt_cmd="internxt login-legacy -x -e \"$INTERNXT_EMAIL_VALUE\" -p \"$INTERNXT_PASSWORD_VALUE\""
     if [ -n "$INTERNXT_TOTP_CODE_VALUE" ]; then
         log "Using 2FA-TOTP-CODE Login"
         internxt_cmd="$internxt_cmd -w \"$INTERNXT_TOTP_CODE_VALUE\""
