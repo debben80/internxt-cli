@@ -1,11 +1,11 @@
-FROM alpine:3.22 AS build
+FROM alpine:3.23 AS build
 WORKDIR /app
 COPY /app .
 RUN apk -U upgrade && \
     apk add npm && \
     npm install --omit=dev
 
-FROM alpine:3.22
+FROM alpine:3.23
 ENV TZ=Etc/UTC
 WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
