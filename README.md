@@ -59,6 +59,7 @@ You can configure the container using the following environment variables:
 | `INTERNXT_PASSWORD`          | Internxt login password.                                  | **Yes**  |          |
 | `INTERNXT_TOTP_CODE`         | TOTP code for two-factor authentication.                  | No       |          |
 | `INTERNXT_TOTP_SECRET`       | TOTP secret for 2FA (INTERNXT_TOTP_CODE have priority)    | No       |          |
+| `WEBDAV_HOST`                | Listening host for WebDAV                                 | No       | `127.0.0.1`   |
 | `WEBDAV_PROTO`               | Protocol for WebDAV (`http` or `https`).                  | No       | `https`  |
 | `WEBDAV_PORT`                | WebDAV listening port.                                    | No       | `3005`   |
 | `WEBDAV_LOGS`                | Log level (`error` or `debug`).                           | No       | `error`  |

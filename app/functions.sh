@@ -64,9 +64,9 @@ internxt_webdav() {
     local webdav_config="internxt webdav-config"
     log "Configure WebDAV server..."
     if [ "$WEBDAV_PROTO" = "http" ]; then
-        webdav_config="$webdav_config -h -p $WEBDAV_PORT"
+        webdav_config="$webdav_config -h -p $WEBDAV_PORT -l $WEBDAV_HOST"
     else
-        webdav_config="$webdav_config -s -p $WEBDAV_PORT"
+        webdav_config="$webdav_config -s -p $WEBDAV_PORT -l $WEBDAV_HOST"
     fi
     eval "$webdav_config"
     if [ $? -ne 0 ]; then
