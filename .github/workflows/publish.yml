@@ -44,7 +44,7 @@ jobs:
 
       - name: Build and push dev Docker image
         id: push-dev
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/amd64
@@ -93,7 +93,7 @@ jobs:
 
       - name: Build and push main Docker image
         id: push-main
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7
